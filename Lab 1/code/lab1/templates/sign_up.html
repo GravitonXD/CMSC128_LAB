@@ -140,6 +140,12 @@
           alert('Password must contain atleast 1 symbol');
           return false;
         }
+
+        // Check if password and confirm password match
+        if (password1 != password2) {
+          alert('Confirm Password do not match');
+          return false;
+        }
     
         return true;
       }
@@ -171,6 +177,6 @@
           }
       });
     </script>
-    
+
 </html>
 
