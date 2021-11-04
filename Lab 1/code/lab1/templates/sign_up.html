@@ -37,10 +37,16 @@
 
                 <div class="columns is-centered">
                     <div class="column is-4">
-                        <form id="signup_form" class="box"> {% csrf_token %}
+                        <form id="signup_form" method="POST" action="" class="box"> {% csrf_token %}
                           <div class="field">
                             <p class="control">
-                              <input class="input" type="text" placeholder="Name" id="reg_name">  
+                              <input class="input" type="text" placeholder="First Name" id="reg_first_name">  
+                            </p>
+                          </div>
+
+                          <div class="field">
+                            <p class="control">
+                              <input class="input" type="text" placeholder="Last Name" id="reg_last_name">  
                             </p>
                           </div>
 
@@ -93,9 +99,7 @@
                               </button>
                             </p>
                             <p class="control">
-                              <button class="button is-success is-rounded">
-                                Register
-                              </button>
+                              <input class="button is-success is-rounded" type="submit" value="Register" />
                             </p>
                           </div>
                         </form>
