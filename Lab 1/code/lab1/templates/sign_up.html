@@ -36,16 +36,16 @@
 
                 <div class="columns is-centered">
                     <div class="column is-4">
-                        <form action="" class="box">
+                        <form id="signup_form" class="box"> {% csrf_token %}
                           <div class="field">
                             <p class="control">
-                              <input class="input" type="text" placeholder="Name">  
+                              <input class="input" type="text" placeholder="Name" id="reg_name">  
                             </p>
                           </div>
 
                           <div class="field">
                             <p class="control has-icons-left has-icons-right">
-                              <input class="input" type="username" placeholder="Username">
+                              <input class="input" type="username" placeholder="Username" id="reg_username">
                               <span class="icon is-small is-left">
                                 <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_SwqOyE.json" background="transparent"  speed="0.15"  style="width: 60%;" loop autoplay></lottie-player>
                               </span>
@@ -57,7 +57,7 @@
 
                           <div class="field">
                             <p class="control has-icons-left has-icons-right">
-                              <input class="input" type="email" placeholder="Email">
+                              <input class="input" type="email" placeholder="Email" id="reg_email">
                               <span class="icon is-small is-left">
                                 <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_NtuZKU.json" background="transparent"  speed="0.15"  style="width: 60%;" loop autoplay></lottie-player>
                               </span>
@@ -69,7 +69,7 @@
 
                           <div class="field">
                             <p class="control has-icons-left">
-                              <input class="input" type="password" placeholder="Password">
+                              <input class="input" type="password" placeholder="Password" id="reg_password1">
                               <span class="icon is-small is-left">
                                 <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_9LR70U.json" background="transparent"  speed="1"  style="width: 150%;" loop autoplay></lottie-player>
                               </span>
@@ -78,7 +78,7 @@
 
                           <div class="field">
                             <p class="control has-icons-left">
-                              <input class="input" type="password" placeholder="Confirm Password">
+                              <input class="input" type="password" placeholder="Confirm Password" id="reg_password1">
                               <span class="icon is-small is-left">
                                 <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_9LR70U.json" background="transparent"  speed="1"  style="width: 150%;" loop autoplay></lottie-player>
                               </span>
@@ -111,4 +111,66 @@
       </div>
     </body>
 
+    <script type="text/javascript">
+      function validator() {
+        var username = document.getElementById('reg_username').value;
+        var email = document.getElementById('reg_email').value;
+        var password1 = document.getElementById('reg_password1').value;
+        var password2 = document.getElementById('reg_password2').value;
+    
+        // Check if username is atleat 5 chars long
+        if (username.length < 5) {
+          alert('Username must be atleast 5 characters long');
+          return false;
+        }
+        // Check if password: atleast 8 chars containing 1 CAPITAL, 1 number, and 1 symbol
+        if (password1.length < 8) {
+          alert('Password must be atleast 8 characters long');
+          return false;
+        }
+        if (!password1.match(/[A-Z]/)) {
+          alert('Password must contain atleast 1 CAPITAL letter');
+          return false;
+        }
+        if (!password1.match(/[0-9]/)) {
+          alert('Password must contain atleast 1 number');
+          return false;
+        }
+        if (!password1.match(/[!@#$%^&*]/)) {
+          alert('Password must contain atleast 1 symbol');
+          return false;
+        }
+    
+        return true;
+      }
+    
+      // Process the data to be saved in the database under django app (signup_form)
+      $(document).on('submit', '#signup_form', function(event) {
+          // Prevents the page reloading
+          event.preventDefault();
+    
+          if(validator()) {
+              // AJAX
+              $.ajax({
+                  type: 'POST',
+                  url: 'signup_form/create',
+                  data: {
+                      name:$('#reg_name').val(),
+                      username:$('#reg_username').val(),
+                      email:$('#reg_email').val(),
+                      password1:$('#reg_password1').val(),
+                      password2:$('#reg_password2').val(),
+                      csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                  },
+                  success:function() {
+                    if(data.status == "success"){
+                          window.location.href = "{% url 'login' %}";
+                    }
+                  }
+              });
+          }
+      });
+    </script>
+    
 </html>
+
