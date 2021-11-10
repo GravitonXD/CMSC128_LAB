@@ -1,16 +1,13 @@
 from typing import ContextManager
-from django.shortcuts import render
+from django.contrib.messages.api import error
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
-from templates import createUser
+from templates.createUser import CreateUserForm
+from django.contrib import messages
 
 # render index.html when at /home
 def home(request):
     return render(request, 'index.html')
-
-# render signup.html when at /signup
-def signUp(request):
-    return render(request, 'sign_up.html')
 
 # render login.html when at /login
 def login(request):
@@ -32,4 +29,17 @@ def planner(request):
 def profile(request):
     return render(request, 'profile.html')
 
-    
+def signUp(request):
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account created successfully!')
+            return redirect('login')
+        else:
+            messages.error(request, form.errors)
+
+    context = {'form': form}
+    return render(request, 'sign_up.html', context)

@@ -23,6 +23,11 @@
 
                   <div class="columns is-centered">
                       <div class="column is-4">
+                          {% for message in messages %}
+                              <div class="notification is-success">
+                                  {{ message }}
+                              </div>
+                          {% endfor %}
                           <form action="" class="box">
                             <div class="field">
                               <p class="control has-icons-left has-icons-right">
