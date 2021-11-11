@@ -24,11 +24,13 @@
                   <div class="columns is-centered">
                       <div class="column is-4">
                           {% for message in messages %}
-                              <div class="notification is-success">
-                                  {{ message }}
-                              </div>
+                              {% if message.tags == 'success' %}
+                                  <div class="notification is-success">
+                                      {{ message }}
+                                  </div>
+                              {% endif %}
                           {% endfor %}
-                          <form action="" class="box">
+                          <form method="POST" action="" class="box"> {% csrf_token %}
                             <div class="field">
                               <p class="control has-icons-left has-icons-right">
                                 <input class="input" type="username" placeholder="Username">
@@ -58,6 +60,14 @@
                               </p>
                             </div>
                           </form>
+
+                          {% for message in messages %}
+                              {% if message.tags == 'error' %}
+                                  <div class="notification is-danger">
+                                      {{ message }}
+                                  </div>
+                              {% endif %}
+                          {% endfor %}
 
                           <div class="column">
                             <p class="subtitle is-7 has-text-centered" style="color: black;"> Don't have an account yet?
