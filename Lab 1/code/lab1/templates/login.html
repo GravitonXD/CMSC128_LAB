@@ -33,7 +33,7 @@
                           <form method="POST" action="" class="box"> {% csrf_token %}
                             <div class="field">
                               <p class="control has-icons-left has-icons-right">
-                                <input class="input" type="username" placeholder="Username">
+                                <input class="input" type="text" name="username" placeholder="Username">
                                 <span class="icon is-small is-left">
                                   <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_SwqOyE.json" background="transparent"  speed="0.15"  style="width: 60%;" loop autoplay></lottie-player>
                                 </span>
@@ -45,7 +45,7 @@
 
                             <div class="field">
                               <p class="control has-icons-left">
-                                <input class="input" type="password" placeholder="Password">
+                                <input class="input" type="password" name="password" placeholder="Password">
                                 <span class="icon is-small is-left">
                                   <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_9LR70U.json" background="transparent"  speed="1"  style="width: 150%;" loop autoplay></lottie-player>
                                 </span>
