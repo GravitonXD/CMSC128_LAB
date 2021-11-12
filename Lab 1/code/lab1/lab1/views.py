@@ -29,6 +29,7 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
+    messages.success(request, 'Logged out successfully!')
     return redirect('login')
 
 # render about.html when at /about
