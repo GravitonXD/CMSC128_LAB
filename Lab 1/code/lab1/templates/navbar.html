@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    {% load static %}
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <title>
+        {% if request.resolver_match.url_name == 'home' %}
+        Home
+        {% elif request.resolver_match.url_name == 'about' %}
+        About
+        {% elif request.resolver_match.url_name == 'planner' %}
+        Planner
+        {% elif request.resolver_match.url_name == 'contact' %}
+        Contact
+        {% elif request.resolver_match.url_name == 'profile' %}
+        Profile
+        {% endif %}
+    </title>     
+</head>
+
+<style>
+    .active{
+        color: hsl(204, 86%, 53%);
+        font-weight: bolder;
+    }
+</style>
+
+<body>
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'home' %}">
+            <span class="icon">
+                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_kzfpndct.json" background="transparent"  speed="1"  style="width: 30px; height: 30px;" loop autoplay></lottie-player>
+            </span>
+            <span>
+                <p class="title is-6 weight-bold">BIKEPACKING.PH</p>
+            </span>
+            </a>
+        </div>
+
+        <a class="navbar-item" href="{% url 'home' %}">
+            <p class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</p>
+        </a>
+
+        <a class="navbar-item" href="{% url 'about' %}">
+            <p class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</p>
+        </a>
+
+        <a class="navbar-item" href="{% url 'planner' %}">
+            <p class="{% if request.resolver_match.url_name == 'planner' %}active{% endif %}">Planner</p>
+        </a>
+
+        <a class="navbar-item" href="{% url 'contact' %}">
+            <p class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</p>
+        </a>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+            <a class="button {% if request.resolver_match.url_name == 'profile' %} is-success {% else %} is-info {% endif %} is-rounded" href="{% url 'profile' %}">
+                <span class="icon">
+                    <i class="fa-solid fa-user"></i>
+                </span>
+                <span>
+                    <p> Hello, {{user.username}} </p>
+                </span>
+            </a>
+            </div>
+
+            <div class="navbar-item">
+                <a class="button is-danger is-rounded" href="{% url 'logout' %}">
+                    <span class="icon">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </span>
+                    <span>
+                        <p> Logout </p>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content container">
+        <div class="row">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+
+</html>

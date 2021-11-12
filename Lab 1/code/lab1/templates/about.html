@@ -3,66 +3,14 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        {% extends 'navbar.html' %}
         {% load static %}
         <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <title>About</title>          
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>      
     </head>
 
     <body>
-        <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-              <a class="navbar-item" href="{% url 'home' %}">
-                <span class="icon">
-                  <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_kzfpndct.json" background="transparent"  speed="1"  style="width: 30px; height: 30px;" loop autoplay></lottie-player>
-                </span>
-                <span>
-                    <p class="title is-6 weight-bold">BIKEPACKING.PH</p>
-                </span>
-              </a>
-            </div>
-            
-            <a class="navbar-item" href="{% url 'home' %}">
-              Home
-            </a>
-
-            <a class="navbar-item" style="font-weight: bold; color: hsl(204, 86%, 53%)" href="{% url 'about' %}">
-              About
-            </a>
-
-            <a class="navbar-item" href="{% url 'planner' %}">
-              Planner
-            </a>
-
-            <a class="navbar-item" href="{% url 'contact' %}">
-              Contact
-            </a>
-
-            <div class="navbar-end">
-              <div class="navbar-item">
-                <a class="button is-info is-rounded" href="{% url 'profile' %}">
-                    <span class="icon">
-                        <i class="fa-solid fa-user"></i>
-                    </span>
-                    <span>
-                      <p> Hello, {{user.username}} </p>
-                    </span>
-                </a>
-              </div>
-
-              <div class="navbar-item">
-                  <a class="button is-danger is-rounded" href="{% url 'logout' %}">
-                      <span class="icon">
-                          <i class="fa-solid fa-right-from-bracket"></i>
-                      </span>
-                      <span>
-                          <p> Logout </p>
-                      </span>
-                  </a>
-              </div>
-            </div>
-          </nav>
-
+      {% block content %}
           <div style="margin-bottom: 50px;"></div>
 
           <div class="columns is-centered">
@@ -75,7 +23,7 @@
           <div class="hero is-centered">
             <lottie-player src="https://assets1.lottiefiles.com/private_files/lf30_y9czxcb9.json" background="transparent"  speed="1"  style="width: auto; height: 400px;" loop autoplay></lottie-player>
           </div>
-
+      {% endblock %}
           
     </body>
 
