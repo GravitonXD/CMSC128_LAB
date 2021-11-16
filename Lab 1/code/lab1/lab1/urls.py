@@ -28,7 +28,8 @@ urlpatterns = [
     path('about', views.about, name='about'),
     path('contact', views.contact, name='contact'),
     path('planner', views.planner, name='planner'),
-    path('profile', views.profile, name='profile')
+    path('profile', views.profile, name='profile'),
+    path('timeout', views.timeout, name='timeout'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

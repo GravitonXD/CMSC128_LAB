@@ -45,26 +45,6 @@ class CreateUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
-    
-    email = forms.EmailField(
-        label='E-mail',
-        widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'E-mail'}),
-        required=True)
-    
-    password1 = forms.CharField(
-        label="Password",
-        widget=forms.PasswordInput(attrs={'class':'input', 'type':'password', 'placeholder':'Password'}),
-        required=True,
-    )
-    password2 = forms.CharField(
-        label="Confirm Password",
-        widget=forms.PasswordInput(attrs={'class':'input', 'type':'password', 'placeholder':'Confirm Password'}),
-        required=True,
-    )
-
-    class Meta:
-        model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
     # Check if username is already taken
@@ -75,7 +55,7 @@ class CreateUserForm(UserCreationForm):
         return username
     
     # Check if email is already taken, and if it is not check if it is a valid email
-    # It is valid if it ends with a .com or .edu.ph
+    # It is valid if it ends with a .com or .edu.ph, and an @ symbol is present
     def clean_email(self, *args, **kwargs):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():

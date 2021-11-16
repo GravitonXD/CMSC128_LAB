@@ -69,3 +69,8 @@ def signUp(request):
                 return redirect('signup')
 
     return render(request, 'sign_up.html', context={'form': form})
+
+def timeout(request):
+    logout(request)
+    messages.error(request, "You've been logged out due to recent inactivity")
+    return redirect('login')
